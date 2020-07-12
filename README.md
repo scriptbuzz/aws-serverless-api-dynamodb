@@ -1,5 +1,8 @@
 # serverless-api-dynamodb
 
+Updated by: MBX
+Version: 0.02a
+
 Using the AWS Serverless Application Model (SAM) this solution deploys a serverless RESTful API in your AWS account that will return data from a DynamoDB table using Lambda functions as the compute engine. Refer to the architecture diagram at the end of this page.
 
 When you successfully launch the ASM template, the following resources will be provisioned:
@@ -13,8 +16,8 @@ When you successfully launch the ASM template, the following resources will be p
 # deployment instructions
 
 - Create an S3 bucket to host the Lambda functions code
-- Zip and upload the Node.js code to the S3 bucket
-- Launch the SAM template from the CloudFormation console (or any supported tool)
+- Zip and upload the (index.js) code to the S3 bucket
+- Launch the SAM template (mbx-template.yml) from the CloudFormation console (or any supported tool)
 - The SAM template requires two input parameters:
 - Enter the name the S3 bucket containing the uploaded code zip file
 - Enter the path/file name of the zip file
