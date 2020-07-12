@@ -1,8 +1,10 @@
-# serverless-api-dynamodb
+# serverless api lambda dynamodb solution
 
 Updated by: mbitar / Ver: 0.02a
 
 Using the AWS Serverless Application Model (SAM) this solution deploys a serverless RESTful API in your AWS account that will return data from a DynamoDB table using Lambda functions as the compute engine. Refer to the architecture diagram at the end of this page.
+
+# provisioned resources
 
 When you successfully launch the ASM template, the following resources will be provisioned:
 
@@ -24,7 +26,7 @@ When you successfully launch the ASM template, the following resources will be p
 - Once the DynamoDB table is deployed, create test items. id=1, id=2, id=3
 
 
-# Test instruction 
+# test instructions
 
 NOTE: Your API URL will be different from the example's
 
