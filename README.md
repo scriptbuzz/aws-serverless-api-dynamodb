@@ -10,11 +10,14 @@ The template also creates CloudWatch Log Groups for the two Lambda functions, wi
 
 Once the DynamoDB table is deployed, add test items, then invoke the APIs from the respective stage.
 
-# How to test the deployment (the APIs in the example are not live):
+# How to test the deployment
 
-In the DynamoDB table, added key id items: 1,2,3
+NOTE: Your API url will be different from the example's.
 
-From a browser, if you invoke the following prod stage API with the "/resource" path:
+
+1) In the DynamoDB table, added key id items: 1,2,3
+
+2) From a browser, if you invokethe prod API url with the "/resource" path:
 
 https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource
 
@@ -23,9 +26,11 @@ The API will return all items in your DynamoDB table:
 
 {"id":{"S":"2"}}{"id":{"S":"1"}}{"id":{"S":"3"}}
 
-If you invoke the following prod stage API using the "resource/3" path:
+
+3) If you invoke the prod API url using the "resource/3" path:
 
 https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource/3
+
 
 The API will return the following single item:
 
