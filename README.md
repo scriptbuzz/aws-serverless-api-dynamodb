@@ -1,38 +1,43 @@
 # serverless-api-dynamodb
 
-Using AWS Serverless Application Model (SAM), this solution provisions an API Gateway with multiple stages, a DynamoDB table with a primary key attribute "id", and deploys two Lambda functions in NodeJS. The APIs invoke Lambda functions to return a single item or all items from from the DynamoDB table.
+Using the AWS Serverless Application Model (SAM) this solution provisions the following resources:
 
-The SAM template has two input parameters: 
-1) an S3 bucket name parameter that for the S3 bucket that contains the zip file of the Lambda code, and 
-2) the path/file name of the Lambda code zip package saved in the S3 bucket.
+- Amazon API Gateway with multiple stages including dev and prod 
+- DynamoDB table with a primary key attribute "id" type string
+- Two Lambda functions in Node.js 
+- CloudWatch Log Groups for the two Lambda functions, with a retention policy of 30 days
+- Lambda execution IAM Role with trimmed IAM actions to support solution actions
 
-The template also creates CloudWatch Log Groups for the two Lambda functions, with a retention policy of 30 days. It also creates the needed Lambda execution IAM Role with limited IAM actions.
+# deployment instructions
 
-Once the DynamoDB table is deployed, add test items, then invoke the APIs from the respective stage.
-
-# How to test the deployment
-
-NOTE: Your API url will be different from the example's.
-
-
-1) In the DynamoDB table, added key id items: 1,2,3
-
-2) From a browser, if you invokethe prod API url with the "/resource" path:
-
-https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource
+- Create an S3 bucket to host the Lambda functions code
+- Zip and upload the Node.js code to the S3 bucket
+- Launch the SAM template from the CloudFormation console (or any suported mechanism)
+- The SAM template reuires two input parameters:
+- Enter the name the S3 bucket containing the uploaded code zip file
+- Enter the path/file name of the zip file
+- Wait for sucessful deployment of the SAM template
+- Once the DynamoDB table is deployed, create test items. id=1, id=2, id=3.
 
 
-The API will return all items in your DynamoDB table: 
+# Test instruction 
+
+NOTE: Your API url will be different from the example's
+
+- From a browser, if you invoke the prod API url with the "/resource" path:
+
+Example: https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource
+
+The API will return all items in youe DynamoDB table: 
 
 {"id":{"S":"2"}}{"id":{"S":"1"}}{"id":{"S":"3"}}
 
 
-3) If you invoke the prod API url using the "resource/3" path:
+- If you invoke the prod API url using the "resource/3" path:
 
-https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource/3
+Example: https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource/3
 
-
-The API will return the following single item:
+The API should return the following single item:
 
 {
   "Item": {
