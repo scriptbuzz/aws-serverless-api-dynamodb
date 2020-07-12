@@ -16,7 +16,9 @@ In the DynamoDB table, added key id items: 1,2,3
 
 From a browser, if you invoke the following prod stage API with the "/resource" path:
 
-https://abcdefj.execute-api.us-east-1.amazonaws.com/prod/resource
+https\://abcdefj.execute-api.us-east-1.amazonaws.com/prod/resource
+
+[GitHub](http://github.com)
 
 The API will return all items in your DynamoDB table: {"id":{"S":"2"}}{"id":{"S":"1"}}{"id":{"S":"3"}}
 
