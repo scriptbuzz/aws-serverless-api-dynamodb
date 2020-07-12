@@ -1,6 +1,8 @@
 # serverless-api-dynamodb
 
-Using the AWS Serverless Application Model (SAM) this solution provisions the following resources:
+Using the AWS Serverless Application Model (SAM) this solution deployes a serverless RESTful API in your AWS account that will return data from a DynamoDB table using Lambda functions as the compute engine. 
+
+When you successfully launch the ASM template, the following resources will be provisioned:
 
 - Amazon API Gateway with multiple stages including dev and prod 
 - DynamoDB table with a primary key attribute "id" type string
