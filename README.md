@@ -26,26 +26,26 @@ NOTE: Your API url will be different from the example's
 
 - From a browser, if you invoke the prod API url with the "/resource" path:
 
-Example: https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource
+-- Example: https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource
 
-The API will return all items in youe DynamoDB table: 
+-- The API will return all items in youe DynamoDB table: 
 
-{"id":{"S":"2"}}{"id":{"S":"1"}}{"id":{"S":"3"}}
+      {"id":{"S":"2"}}{"id":{"S":"1"}}{"id":{"S":"3"}}
 
 
 - If you invoke the prod API url using the "resource/3" path:
 
-Example: https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource/3
+-- Example: https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource/3
 
-The API should return the following single item:
+-- The API should return the following single item:
 
-{
-  "Item": {
-    "id": {
-      "S": "3"
-    }
-  }
-}
+      {
+        "Item": {
+          "id": {
+            "S": "3"
+          }
+        }
+      }
 
 ![GitHub Logo](mbx-serverless-api.jpg)
 
