@@ -1,0 +1,147 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Mike Bitar @ Jul 11, 2020 - UPDATE accept CodeUri as paramater
+
+Parameters: 
+  BucketName: 
+    Type: String
+    Description: S3 bucket name
+  CodeKey:
+    Type: String
+    Description: The code package file name in the bucket. Eaxample - index.zip
+
+Resources:
+  GetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.get
+      Runtime: nodejs10.x
+      CodeUri:
+        Bucket: !Ref BucketName
+        Key: !Ref CodeKey
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Table
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /resource/{resourceId}
+            Method: get
+            RestApiId:
+              Ref: APIGateway    
+       
+  GetAllFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+        Handler: index.getall
+        Runtime: nodejs10.x
+        CodeUri:
+          Bucket: !Ref BucketName
+          Key: !Ref CodeKey
+        Role: !GetAtt LambdaExecutionRole.Arn
+        Environment:
+          Variables:
+            TABLE_NAME: !Ref Table
+        Events:
+          GetResource:
+            Type: Api
+            Properties:
+              Path: /resource/
+              Method: get  
+              RestApiId:
+                Ref: APIGateway             
+
+  APIGateway:
+    Type: AWS::Serverless::Api
+    DependsOn: GetAllFunction
+    Properties:
+      StageName: qa
+        
+  ApiGatewayStageDev:
+      Type: 'AWS::ApiGateway::Stage'
+      Properties:
+        StageName: dev
+        Description: Dev Stage
+        RestApiId: 
+          Ref: APIGateway
+        DeploymentId: 
+          Ref: ApiGatewayDeploymentDev
+        Variables:
+          "Stage": "dev"
+          
+  ApiGatewayStageProd:
+      Type: 'AWS::ApiGateway::Stage'
+      Properties:
+        StageName: prod
+        Description: prod Stage
+        RestApiId: 
+          Ref: APIGateway
+        DeploymentId: 
+          Ref: ApiGatewayDeploymentProd
+        Variables:
+          "Stage": "prod"     
+          
+  ApiGatewayDeploymentDev:
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      RestApiId:
+        Ref: APIGateway
+      Description: 'Dev deployment'
+    
+  ApiGatewayDeploymentProd:
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      RestApiId:
+        Ref: APIGateway
+      Description: 'Prod Deployment'    
+      
+  Table:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+        PrimaryKey:
+          Name: id
+          Type: String
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5      
+
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: root
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:GetItem
+              - dynamodb:Scan
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource: '*'         
+
+  LogRetentionGet:
+    Type: AWS::Logs::LogGroup
+    Properties: 
+      LogGroupName: !Sub "/aws/lambda/${GetFunction}"
+      RetentionInDays: 30     
+      
+  LogRetentionGetAll:
+    Type: AWS::Logs::LogGroup
+    Properties: 
+      LogGroupName: !Sub "/aws/lambda/${GetAllFunction}"
+      RetentionInDays: 30                   
