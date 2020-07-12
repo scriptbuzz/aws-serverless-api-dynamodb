@@ -2,7 +2,7 @@
 
 Updated by: mbitar / Ver: 0.02a
 
-Using the AWS Serverless Application Model (SAM) this solution deploys a serverless RESTful API in your AWS account that will return data from a DynamoDB table using Lambda functions as the compute engine. Refer to the architecture diagram at the end of this page.
+Using the AWS Serverless Application Model (SAM) this skeletal solution deploys a serverless RESTful API in your AWS account that will return data from a DynamoDB table using Lambda functions as the compute engine. Refer to the architecture diagram at the end of this page.
 
 # provisioned resources
 
