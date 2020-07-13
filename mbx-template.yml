@@ -5,10 +5,10 @@ Description: Mike Bitar @ Jul 11, 2020 - UPDATE accept CodeUri as paramater
 Parameters: 
   BucketName: 
     Type: String
-    Description: S3 bucket name
+    Description: The S3 bucket name hosting the Lambda code package
   CodeKey:
     Type: String
-    Description: The code package file name in the bucket. Eaxample - index.zip
+    Description: The code package path/file name in the S3 bucket. Eaxample - index.zip
 
 Resources:
   GetFunction:
