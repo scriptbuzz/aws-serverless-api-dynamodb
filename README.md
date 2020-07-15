@@ -6,7 +6,7 @@ Using the AWS Serverless Application Model (SAM) this skeletal solution deploys 
 
 # provisioned resources
 
-When you successfully launch the ASM template, the following resources will be provisioned:
+When you successfully launch the SAM template, the following resources will be provisioned:
 
 - Amazon API Gateway with multiple stages including dev and prod 
 - DynamoDB table with a primary key attribute "id" type string
@@ -20,10 +20,10 @@ When you successfully launch the ASM template, the following resources will be p
 - Zip and upload the (index.js) code to the S3 bucket
 - Launch the SAM template (mbx-template.yml) from the CloudFormation console (or any supported tool)
 - The SAM template requires two input parameters:
-- Enter the name the S3 bucket containing the uploaded code zip file
-- Enter the path/file name of the zip file
+      - Enter the name the S3 bucket containing the uploaded code zip file
+      - Enter the path/file name of the zip file
 - Wait for successful deployment of the SAM template
-- Once the DynamoDB table is deployed, create test items. id=1, id=2, id=3
+- Once the DynamoDB table is deployed, create test items: id=1, id=2, id=3
 
 
 # test instructions
@@ -34,7 +34,7 @@ NOTE: Your API URL will be different from the example's
 
       - Example: https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource
 
-- The API will return all items in youe DynamoDB table: 
+- The API will return all items in your DynamoDB table: 
 
               {"id":{"S":"2"}}{"id":{"S":"1"}}{"id":{"S":"3"}}
 
