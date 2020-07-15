@@ -20,8 +20,8 @@ When you successfully launch the SAM template, the following resources will be p
 - Zip and upload the (index.js) code to the S3 bucket
 - Launch the SAM template (mbx-template.yml) from the CloudFormation console (or any supported tool)
 - The SAM template requires two input parameters:
-      - Enter the name the S3 bucket containing the uploaded code zip file
-      - Enter the path/file name of the zip file
+- Enter the name the S3 bucket containing the uploaded code zip file
+- Enter the path/file name of the zip file
 - Wait for successful deployment of the SAM template
 - Once the DynamoDB table is deployed, create test items: id=1, id=2, id=3
 
@@ -30,7 +30,7 @@ When you successfully launch the SAM template, the following resources will be p
 
 NOTE: Your API URL will be different from the example's
 
-- From a browser, if you invoke the prod API url with the "/resource" path:
+- From a browser, invoke the prod API url with the "/resource" path:
 
       - Example: https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource
 
@@ -39,7 +39,7 @@ NOTE: Your API URL will be different from the example's
               {"id":{"S":"2"}}{"id":{"S":"1"}}{"id":{"S":"3"}}
 
 
-- If you invoke the prod API URL using the "resource/3" path:
+- Invoke the prod API URL using the "resource/3" path:
 
       - Example: https://abcdefg.execute-api.us-east-1.amazonaws.com/prod/resource/3
 
