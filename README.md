@@ -53,6 +53,6 @@ NOTE: Your API URL will be different from the example's
               }
             }
 
-![GitHub Logo](mbx-serverless-api.jpg)
+![AWS Arch](mbx-serverless-api.jpg)
 
 
